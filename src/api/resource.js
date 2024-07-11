@@ -71,10 +71,14 @@ class Resource {
    * @param {string} id - The ID of the resource.
    * @returns {Promise<any>} A promise that resolves to the retrieved resource.
    */
-  async get(resource, id) {
+  async get(resource, id, action = '') {
     validateResource(resource)
     try {
-      const response = await this.client.get(`/${resource}/${id}/`)
+      let path = `/${resource}/${id}/`
+      if (action) {
+        path += action + '/'
+      }
+      const response = await this.client.get(path)
       return response.data
     } catch (error) {
       handleError(error)
