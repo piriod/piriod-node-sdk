@@ -8,12 +8,28 @@
  */
 const validateResource = (resource) => {
   const validResources = [
+    'addons',
     'bulks/invoices',
     'bulks/retentions',
+    'contacts',
+    'coupons',
+    'creditnotes',
     'customers',
+    'debitnotes',
     'invoices',
+    'orders',
+    'orgunits',
     'payments',
-    'sources'
+    'plans',
+    'products',
+    'reminders/pendings',
+    'reminders/messages',
+    'reminders/templates',
+    'reminders/rules',
+    'retentions',
+    'sources',
+    'subscriptions',
+    'usages'
   ]
 
   if (!validResources.includes(resource)) {
