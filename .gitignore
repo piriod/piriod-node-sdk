@@ -1,0 +1,7 @@
+.ENV
+.env
+.env.*.json
+
+node_modules
+
+*.tgz

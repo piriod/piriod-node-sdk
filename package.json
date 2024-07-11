@@ -1,0 +1,25 @@
+{
+  "name": "piriod-sdk",
+  "version": "0.0.3",
+  "description": "Piriod Node sdk",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --runInBand"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piriod/piriod-node-sdk.git"
+  },
+  "author": "Simple Technologies SpA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piriod/piriod-node-sdk/issues"
+  },
+  "homepage": "https://github.com/piriod/piriod-node-sdk#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  },
+  "devDependencies": {
+    "jest": "^28.1.1"
+  }
+}
