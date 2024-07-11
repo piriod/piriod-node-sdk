@@ -1,4 +1,5 @@
 const { handleError } = require('../errors')
+const { validateResource } = require('../validators')
 
 class Resource {
   /**
@@ -19,6 +20,7 @@ class Resource {
    * @returns {Promise<object>} - A promise that resolves to the created resource.
    */
   async create(resource, data) {
+    validateResource(resource)
     try {
       const response = await this.client.post(resource, data)
       return response.data
@@ -36,6 +38,7 @@ class Resource {
    * @returns {Promise<object>} - A promise that resolves to the updated resource data.
    */
   async update(resource, id, data) {
+    validateResource(resource)
     try {
       const response = await this.client.put(`/${resource}/${id}/`, data)
       return response.data
@@ -52,6 +55,7 @@ class Resource {
    * @returns {Promise<any>} A promise that resolves to the deleted resource data.
    */
   async delete(resource, id) {
+    validateResource(resource)
     try {
       const response = await this.client.delete(`/${resource}/${id}/`)
       return response.data
@@ -68,6 +72,7 @@ class Resource {
    * @returns {Promise<any>} A promise that resolves to the retrieved resource.
    */
   async get(resource, id) {
+    validateResource(resource)
     try {
       const response = await this.client.get(`/${resource}/${id}/`)
       return response.data
@@ -84,6 +89,7 @@ class Resource {
    * @returns {Promise<Array>} - A promise that resolves to an array of resources.
    */
   async list(resource, query = {}) {
+    validateResource(resource)
     try {
       const response = await this.client.get(`/${resource}/`, { params: query })
       return response.data
