@@ -19,10 +19,26 @@ class Resource {
    * @param {object} data - The data to be sent for creating the resource.
    * @returns {Promise<object>} - A promise that resolves to the created resource.
    */
-  async create(resource, data) {
+  async create(resource, data, action, id) {
     validateResource(resource)
+
+    let path = `/${resource}/`
+
+    // if an ID is provided, append it to the path
+    // for example, /resource/:id/
+    if (id) {
+      path += id + '/'
+    }
+
+    // if an action is provided, append it to the path
+    // for example, /resource/action
+    // or /resource/:id/action if an ID is provided
+    if (action) {
+      path += action + '/'
+    }
+
     try {
-      const response = await this.client.post(resource, data)
+      const response = await this.client.post(path, data)
       return response.data
     } catch (error) {
       handleError(error)
