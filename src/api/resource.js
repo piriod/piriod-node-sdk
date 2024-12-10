@@ -17,9 +17,11 @@ class Resource {
    *
    * @param {string} resource - The resource endpoint.
    * @param {object} data - The data to be sent for creating the resource.
+   * @param {string} [action=null] - The action to perform on the resource.
+   * @param {string} [id=null] - The ID of the resource to perform the action on.
    * @returns {Promise<object>} - A promise that resolves to the created resource.
    */
-  async create(resource, data, action, id) {
+  async create(resource, data, action = null, id = null) {
     validateResource(resource)
 
     let path = `/${resource}/`
@@ -106,12 +108,30 @@ class Resource {
    *
    * @param {string} resource - The name of the resource.
    * @param {Object} [query={}] - The query parameters for filtering the list.
+   * @param {string} [action=null] - The action to perform on the resource.
+   * @param {string} [id=null] - The ID of the resource to perform the action on.
    * @returns {Promise<Array>} - A promise that resolves to an array of resources.
    */
-  async list(resource, query = {}) {
+  async list(resource, query = {}, action = null, id = null) {
     validateResource(resource)
+
+    let path = `/${resource}/`
+
+    // if an ID is provided, append it to the path
+    // for example, /resource/:id/
+    if (id) {
+      path += id + '/'
+    }
+
+    // if an action is provided, append it to the path
+    // for example, /resource/action
+    // or /resource/:id/action if an ID is provided
+    if (action) {
+      path += action + '/'
+    }
+
     try {
-      const response = await this.client.get(`/${resource}/`, { params: query })
+      const response = await this.client.get(path, { params: query })
       return response.data
     } catch (error) {
       handleError(error)
