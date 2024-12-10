@@ -16,13 +16,19 @@ class Piriod {
    * @param {string} options.organizationID - The ID of the organization.
    */
   constructor({ apiKey, organizationID }) {
+    const headers = {
+      Authorization: `Token ${apiKey}`,
+      'Content-Type': 'application/json'
+    }
+
+    // if an organization ID is provided, set the workspace header
+    if (organizationID) {
+      headers['X-Simple-Workspace'] = organizationID
+    }
+
     this.client = axios.create({
       baseURL: baseURL,
-      headers: {
-        'Authorization': `Token ${apiKey}`,
-        'X-Simple-Workspace': organizationID,
-        'Content-Type': 'application/json'
-      }
+      headers: headers
     })
 
     this.resource = new Resource(this.client)
