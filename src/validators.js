@@ -9,6 +9,7 @@
 const validateResource = (resource) => {
   const validResources = [
     'addons',
+    'banks',
     'bulks/invoices',
     'bulks/retentions',
     'contacts',
@@ -17,6 +18,7 @@ const validateResource = (resource) => {
     'customers',
     'debitnotes',
     'invoices',
+    'ops',
     'orders',
     'orgunits',
     'payments',
