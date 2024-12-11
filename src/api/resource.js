@@ -82,20 +82,25 @@ class Resource {
     }
   }
 
-  /**
-   * Retrieves a resource by its ID.
-   *
-   * @param {string} resource - The name of the resource.
-   * @param {string} id - The ID of the resource.
-   * @returns {Promise<any>} A promise that resolves to the retrieved resource.
-   */
-  async get(resource, id, action = '') {
+  async get(resource, id = null, action = null) {
     validateResource(resource)
+
+    let path = `/${resource}/`
+
+    // if an ID is provided, append it to the path
+    // for example, /resource/:id/
+    if (id) {
+      path += id + '/'
+    }
+
+    // if an action is provided, append it to the path
+    // for example, /resource/action
+    // or /resource/:id/action if an ID is provided
+    if (action) {
+      path += action + '/'
+    }
+
     try {
-      let path = `/${resource}/${id}/`
-      if (action) {
-        path += action + '/'
-      }
       const response = await this.client.get(path)
       return response.data
     } catch (error) {
