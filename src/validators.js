@@ -10,6 +10,7 @@ const validateResource = (resource) => {
   const validResources = [
     'addons',
     'banks',
+    'billers/built_in',
     'bulks/invoices',
     'bulks/retentions',
     'contacts',
